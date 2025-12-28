@@ -1,13 +1,33 @@
 <h1>Welcome to Tasker!</h1>
 <h2>Tasks</h2>
-{% if latest_task_list %}
+
+{% if page_obj %}
     <ul>
-    {% for task in latest_task_list %}
-        <li><a href="/tasks/{{task.id}}" >{{task.taskname}}</a></li>
-    {% endfor %}
+{% for task in page_obj %}
+<li>
+  <a href="/tasks/{{ task.id }}">{{ task.taskname }}</a>
+  <a href="{% url 'update_task' task.id %}">Editar</a>
+  <a href="{% url 'delete_task' task.id %}">Borrar</a>
+</li>
+{% endfor %}
+
     </ul>
 {% else %}
     <p>No tasks are available.</p>
 {% endif %}
-<br></br>
+
+<br>
+
 {% include "apptareas/create.html" %}
+
+<div>
+  {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+  {% endif %}
+
+  Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Siguiente</a>
+  {% endif %}
+</div>

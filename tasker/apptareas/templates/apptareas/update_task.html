@@ -1,0 +1,9 @@
+<h1>Update task</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save changes</button>
+</form>
+
+<a href="{% url 'index' %}">Cancel</a>

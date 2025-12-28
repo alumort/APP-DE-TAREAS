@@ -1,5 +1,5 @@
 <h2>Create Task:</h2>
-<form action="newTask/" method="post">
+<form action="/newTask/" method="post">
 {% csrf_token %}
 <label for="taskname"> Task Name:</label><br>
 <input id="taskname" type="text" name="taskname" maxlength=100 required></br>
